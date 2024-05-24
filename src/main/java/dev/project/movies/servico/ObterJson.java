@@ -8,9 +8,10 @@ import java.net.http.HttpResponse;
 
 public class ObterJson {
 
-    public String obterDados(String nomeFilme) throws IOException, InterruptedException {
+    public String obterDados(String endereco) throws IOException, InterruptedException {
 
-        String endereco = "http://www.omdbapi.com/?t=" + nomeFilme.replace(" ", "+") + "&apikey=4a6ce6d9";
+        //https://api.themoviedb.org/3/search/movie?api_key=262d9d3f4737e9758af9e6d47c1168a6&query=batman
+        //https://api.themoviedb.org/3/discover/movie?with_genres=16&api_key=262d9d3f4737e9758af9e6d47c1168a6
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()

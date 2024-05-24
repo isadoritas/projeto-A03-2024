@@ -2,6 +2,9 @@ package dev.project.movies.servico;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
+
+import java.util.List;
 
 public class ExtrairJson implements IExtrairJson{
 
@@ -11,6 +14,18 @@ public class ExtrairJson implements IExtrairJson{
     public <T> T extrairDados(String json, Class<T> classe) throws JsonProcessingException {
         try {
             return mapper.readValue(json, classe);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public <T> List<T> obterLista(String json, Class<T> classe) {
+
+        CollectionType lista = mapper.getTypeFactory()
+                .constructCollectionType(List.class, classe);  // COLETAR E FORMAR UMA LISTA COM OS DADOS
+        try {
+            return mapper.readValue(json, lista);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
