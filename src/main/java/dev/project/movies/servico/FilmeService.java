@@ -1,9 +1,10 @@
 package dev.project.movies.servico;
 
+import dev.project.movies.exception.ValidacaoError;
 import dev.project.movies.model.Filme;
 import dev.project.movies.model.Results;
 import org.springframework.beans.factory.annotation.Autowired;
-import dev.project.movies.repository.Repository;
+import dev.project.movies.repository.FilmeRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -15,13 +16,13 @@ import java.util.stream.Collectors;
 public class FilmeService {
 
     @Autowired
-    private Repository repositorio;
+    private FilmeRepository repositorio;
 
     private ObterJson buscar = new ObterJson();
     private ExtrairJson comsumir = new ExtrairJson();
 
     // CONSTRUTOR
-    public FilmeService(Repository repositorio) {
+    public FilmeService(FilmeRepository repositorio) {
         this.repositorio = repositorio;
     }
 
@@ -30,16 +31,20 @@ public class FilmeService {
 
     // Filmes por Genero
     public List<Filme> listarFilmesPeloGenero(int genero) throws IOException, InterruptedException {
+
         // PEGANDO O JSON DA API E CONVERTENDO EM UMA LISTA DE DADOS FILMES
-        String endereco = "https://api.themoviedb.org/3/discover/movie?with_genres="+ genero +"&api_key=" + System.getenv("TMDB_API_KEY");
+        String endereco = "https://api.themoviedb.org/3/discover/movie?with_genres="
+                + genero +"&api_key=" + System.getenv("TMDB_API_KEY");
         var json = buscar.obterDados(endereco);
         var lista = comsumir.extrairDados(json, Results.class);
+
 
         // TRANSFORMANDO A LISTA DE DADOS FILMES EM OBJETO FILME
         List<Filme> listaFilmes = lista.listaDadosFilmes().stream()
                 .map(d -> new Filme(d.titulo(), d.paraMaiores(), d.sinopse(),
                         d.avaliacao(), d.dataDeLancamento(), d.poster()))
                 .collect(Collectors.toList());
+
 
         // ALTERANDO ALGUNS ATRIBUTOS E SALVANDO NO BANCO
         for (Filme f  : listaFilmes) {
@@ -81,16 +86,20 @@ public class FilmeService {
 
     // Filmes Pesquisados
     public List<Filme> listarFilmesPesquisados(String titulo) throws IOException, InterruptedException {
+
         // PEGANDO O JSON DA API E CONVERTENDO EM UMA LISTA DE DADOS FILMES
-        String endereco = "https://api.themoviedb.org/3/search/movie?api_key=" + System.getenv("TMDB_API_KEY") + "&query=" + titulo.replace(" ", "+");
+        String endereco = "https://api.themoviedb.org/3/search/movie?api_key="
+                + System.getenv("TMDB_API_KEY") + "&query=" + titulo.replace(" ", "+");
         var json = buscar.obterDados(endereco);
         var lista = comsumir.extrairDados(json, Results.class);
+
 
         // TRANSFORMANDO A LISTA DE DADOS FILMES EM OBJETO FILME
         List<Filme> listaFilmesPesquisados = lista.listaDadosFilmes().stream()
                 .map(d-> new Filme(d.titulo(), d.paraMaiores(), d.sinopse(),
                         d.avaliacao(), d.dataDeLancamento(), d.poster()))
                 .collect(Collectors.toList());
+
 
         // ALTERANDO ALGUNS ATRIBUTOS E SALVANDO NO BANCO
         for (Filme f  : listaFilmesPesquisados) {
@@ -108,7 +117,4 @@ public class FilmeService {
         }
         return listaFilmesPesquisados;
     }
-
-
-
 }

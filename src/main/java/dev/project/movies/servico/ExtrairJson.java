@@ -15,7 +15,7 @@ public class ExtrairJson implements IExtrairJson{
         try {
             return mapper.readValue(json, classe);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Erro ao tentar converter Json em Objeto");
         }
     }
 
@@ -27,7 +27,7 @@ public class ExtrairJson implements IExtrairJson{
         try {
             return mapper.readValue(json, lista);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Erro ao tentar converter Json em Objeto");
         }
     }
 
