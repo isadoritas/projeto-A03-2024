@@ -1,0 +1,12 @@
+.navbar .form-inline {
+  margin-left: auto;
+  display: flex;
+}
+
+.navbar-brand {
+  color: aliceblue;
+}
+
+.btn {
+  margin-left: 10px;
+}
