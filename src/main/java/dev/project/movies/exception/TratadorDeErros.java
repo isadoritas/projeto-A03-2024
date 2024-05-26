@@ -48,8 +48,7 @@ public class TratadorDeErros {
         }
     }
 
-
-    // OUTROS ERROS COMUNS
+    // OUTROS ERROS UE SÃO COMUNS
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity tratarErro400(HttpMessageNotReadableException ex) {
         return ResponseEntity.badRequest().body(ex.getMessage());

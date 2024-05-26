@@ -1,7 +1,7 @@
 package dev.project.movies.exception;
 
 
-// Exception modelada
+// EXCEPTION
 public class ValidacaoError extends RuntimeException {
 
     public ValidacaoError(String mensagem) {
