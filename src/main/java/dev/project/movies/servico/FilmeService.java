@@ -2,6 +2,7 @@ package dev.project.movies.servico;
 
 import dev.project.movies.algoritmos.BubbleSort;
 import dev.project.movies.algoritmos.QuickSort;
+import dev.project.movies.exception.ValidacaoError;
 import dev.project.movies.model.Filme;
 import dev.project.movies.model.FilmesFavoritos;
 import dev.project.movies.model.Results;
@@ -161,6 +162,17 @@ public class FilmeService {
                 .skip(random.nextInt(lista.size()))
                 .findFirst()
                 .orElse(null);
+    }
+
+    // Deletar um filme da lista de favoritos
+    public FilmesFavoritos deletarFilme(Integer id) {
+        var filme = favRepository.findById(id);
+        if (filme.isPresent()) {
+            FilmesFavoritos filmesDeletado = filme.get();
+            favRepository.deleteById(id);
+            return filmesDeletado;
+        }
+        throw new ValidacaoError("Filme não encontrado");
     }
 
 

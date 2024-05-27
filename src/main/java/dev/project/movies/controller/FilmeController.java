@@ -66,9 +66,16 @@ public class FilmeController {
        return ResponseEntity.ok().body(service.listarFilmesFavoritos());
     }
 
+    // ESCOLHER FILME ALEATORIO
     @GetMapping("/favoritos/random")
     public ResponseEntity filmeAleatorio() {
        return ResponseEntity.ok().body(service.escolherAleatorio());
+    }
+
+    // DELETAR FILME DA LISTA DE ALEATORIOS
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deletarFavorito(@PathVariable Integer id) {
+       return ResponseEntity.status(204).body(service.deletarFilme(id));
     }
 
 }

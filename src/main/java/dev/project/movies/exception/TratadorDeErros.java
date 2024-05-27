@@ -41,14 +41,14 @@ public class TratadorDeErros {
     }
 
 
-    // DTO DERROS
+    // DTO DE ERROS
     private record DadosErrosValidacao(String campo, String mensagem){
         public DadosErrosValidacao(FieldError error) {
             this(error.getField(), error.getDefaultMessage());  // PEGAR APENAS OS CAMPOS NECESSARIOS NO LIST DE ERROS
         }
     }
 
-    // OUTROS ERROS UE SÃO COMUNS
+    // OUTROS ERROS QUE SÃO COMUNS
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity tratarErro400(HttpMessageNotReadableException ex) {
         return ResponseEntity.badRequest().body(ex.getMessage());

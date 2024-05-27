@@ -33,6 +33,7 @@ public class UsuarioController {
         return ResponseEntity.status(201).body(service.cadastrarUsuario(usuario));
     }
 
+    // REALIZAR LOGIN
     @PostMapping("/login")
     public ResponseEntity logarUsuario(@RequestBody DadosLogin dados) throws ValidacaoError {
         boolean valid = service.validarSenha(dados);
@@ -42,6 +43,7 @@ public class UsuarioController {
         return ResponseEntity.status(200).build();
     }
 
+    // DELETAR USUARIO
     @DeleteMapping("/{id}")
     public ResponseEntity deletarUsuario(@PathVariable Integer id) throws ValidacaoError {
         boolean existe = service.excluirUsuario(id);
