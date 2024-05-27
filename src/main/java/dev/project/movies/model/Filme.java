@@ -2,10 +2,13 @@ package dev.project.movies.model;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "filmes")
 public class Filme {
@@ -14,10 +17,12 @@ public class Filme {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 
-    @Column(unique = true)
     String titulo;
     String classificacaoIndicativa;
+
+    @Column(unique = true)
     String sinopse;
+
     String dataDeLancamento;
     Double avaliacao;
     String poster;
@@ -31,8 +36,6 @@ public class Filme {
         this.poster = backdrop_path;
     }
 
-    public Filme() {
-    }
 
     @Override
     public String toString() {

@@ -1,14 +1,13 @@
 package dev.project.movies.repository;
 
 import dev.project.movies.model.Filme;
-import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.awt.print.Pageable;
+import java.util.Optional;
 
 
 public interface FilmeRepository extends JpaRepository<Filme, Integer> {
 
-    boolean existsByTitulo(String titulo);
+    Optional<Filme> findBySinopse(String titulo);
 
 }

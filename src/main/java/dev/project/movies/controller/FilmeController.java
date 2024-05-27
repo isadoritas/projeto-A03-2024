@@ -38,19 +38,13 @@ public class FilmeController {
     // ORDEM ALFABETICA
     @GetMapping("/ordem/alfabetica")
     public ResponseEntity listaFilmesOrdemAlfabetica() {
-       var lista = service.listarFilmesBanco();
-       var listaOrdenada = lista.stream()
-               .sorted(Comparator.comparing(f->f.getTitulo()));
-       return ResponseEntity.ok().body(listaOrdenada);
+       return ResponseEntity.ok().body(service.ordenarTitulos());
     }
 
     // AVALIACAO
     @GetMapping("/ordenar/avaliacao")
     public ResponseEntity listarFilmesPelaAvaliacao() {
-        var lista = service.listarFilmesBanco();
-        var listaOrdenada = lista.stream()
-                .sorted(Comparator.comparing(f->f.getAvaliacao()));
-        return ResponseEntity.ok().body(listaOrdenada);
+        return ResponseEntity.ok().body(service.ordenarAvaliacao());
     }
 
     // PESQUISA
@@ -59,11 +53,22 @@ public class FilmeController {
        return ResponseEntity.ok().body(service.listarFilmesPesquisados(titulo));
     }
 
-    // DETALHES FILME
-    @GetMapping("/detalhes/{id}")
-    public ResponseEntity detalharFilme(@PathVariable Integer id) {
-       return ResponseEntity.ok().body(service.detalharFilme(id));
+    // FAVORITAR
+    @PostMapping("/favoritar/{id}")
+    public ResponseEntity favoritarFilmes(@PathVariable Integer id) {
+       service.favoritarFilmes(id);
+       return ResponseEntity.status(201).body("Adicionado aos favoritos");
     }
 
+    // LISTAR FILMES FAVORITOS
+    @GetMapping("/lista/favoritos")
+    public ResponseEntity listarFilmesFavoritados() {
+       return ResponseEntity.ok().body(service.listarFilmesFavoritos());
+    }
+
+    @GetMapping("/favoritos/random")
+    public ResponseEntity filmeAleatorio() {
+       return ResponseEntity.ok().body(service.escolherAleatorio());
+    }
 
 }
