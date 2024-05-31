@@ -22,6 +22,9 @@ public class FilmesFavoritos {
     @Column(unique = true)
     String sinopse;
 
+    @Column(name = "usuario_id")
+    private Integer usuarioId;
+
     String dataDeLancamento;
     Double avaliacao;
     String poster;

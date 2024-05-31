@@ -1,6 +1,8 @@
 package dev.project.movies.controller;
 
+
 import dev.project.movies.servico.FilmeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +14,9 @@ import java.io.IOException;
 @RequestMapping("/filmes")
 public class FilmeController {
 
+   @Autowired
    private FilmeService service;
+
 
    // CONSTRUTOR
    public FilmeController(FilmeService service) {
@@ -50,30 +54,4 @@ public class FilmeController {
     public ResponseEntity listarFilmesDaPesquisa(@PathVariable String titulo) throws IOException, InterruptedException {
        return ResponseEntity.ok().body(service.listarFilmesPesquisados(titulo));
     }
-
-    // FAVORITAR
-    @PostMapping("/favoritar/{id}")
-    public ResponseEntity favoritarFilmes(@PathVariable Integer id) {
-       service.favoritarFilmes(id);
-       return ResponseEntity.status(201).body("Adicionado aos favoritos");
-    }
-
-    // LISTAR FILMES FAVORITOS
-    @GetMapping("/lista/favoritos")
-    public ResponseEntity listarFilmesFavoritados() {
-       return ResponseEntity.ok().body(service.listarFilmesFavoritos());
-    }
-
-    // ESCOLHER FILME ALEATORIO
-    @GetMapping("/favoritos/random")
-    public ResponseEntity filmeAleatorio() {
-       return ResponseEntity.ok().body(service.escolherAleatorio());
-    }
-
-    // DELETAR FILME DA LISTA DE ALEATORIOS
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity deletarFavorito(@PathVariable Integer id) {
-       return ResponseEntity.status(204).body(service.deletarFilme(id));
-    }
-
 }

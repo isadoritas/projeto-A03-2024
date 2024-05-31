@@ -3,13 +3,20 @@ package dev.project.movies.servico;
 import dev.project.movies.algoritmos.BubbleSort;
 import dev.project.movies.algoritmos.QuickSort;
 import dev.project.movies.infra.exception.ValidacaoError;
+import dev.project.movies.infra.security.SecurityFilter;
+import dev.project.movies.infra.security.TokenService;
 import dev.project.movies.model.Filme;
 import dev.project.movies.model.FilmesFavoritos;
 import dev.project.movies.model.Results;
+import dev.project.movies.model.Usuario;
 import dev.project.movies.repository.FilmesFavoritosRepository;
+import dev.project.movies.repository.UsuarioRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import dev.project.movies.repository.FilmeRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,6 +30,12 @@ public class FilmeService {
     private FilmeRepository repositorio;
     @Autowired
     private FilmesFavoritosRepository favRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+    @Autowired
+    private TokenService tokenService;
+    @Autowired
+    private SecurityFilter securityFilter;
 
     private ObterJson buscar = new ObterJson();
     private ExtrairJson comsumir = new ExtrairJson();
@@ -30,9 +43,32 @@ public class FilmeService {
     private BubbleSort bubbleSort = new BubbleSort();
     private Random random = new Random();
 
+
     // CONSTRUTOR
     public FilmeService(FilmeRepository repositorio) {
         this.repositorio = repositorio;
+    }
+
+
+    // Pegar token do cabeçalho Authorization
+    public String processarComAuthorization() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        String authorizationHeader = request.getHeader("Authorization");
+
+        if (authorizationHeader != null) {
+            return authorizationHeader.replace("Bearer ", "");
+        } else {
+            throw new RuntimeException("Valor do cabeçalho é nulo");
+        }
+    }
+
+
+    // Pegar id do usuario logado
+    public Integer pegarIdUsuario() {
+        var subject = tokenService.getSubject(processarComAuthorization());
+        Usuario usuario = (Usuario) usuarioRepository.findByEmail(subject);
+        var  usuarioID = usuario.getId();
+        return usuarioID;
     }
 
 
@@ -127,6 +163,7 @@ public class FilmeService {
         return lista;
     }
 
+
     // Ordenar por avaliacao
     public List<Filme> ordenarAvaliacao() {
         var lista = listarFilmesBanco();
@@ -134,11 +171,13 @@ public class FilmeService {
         return lista;
     }
 
+
     // Filmes salvos
     public List<Filme> listarFilmesBanco() {
         var lista = repositorio.findAll();
         return lista;
     }
+
 
     // Favoritar Filmes
     public void favoritarFilmes(Integer id) {
@@ -146,24 +185,30 @@ public class FilmeService {
         if (filmeBanco.isPresent()) {
             var filmeExiste = filmeBanco.get();
             FilmesFavoritos filme = new FilmesFavoritos(filmeExiste);
+            Integer usuarioID = pegarIdUsuario();
+            filme.setUsuarioId(usuarioID);
             favRepository.save(filme);
         }
     }
 
+
     // Listar filmes favoritos
-    public List<FilmesFavoritos> listarFilmesFavoritos() {
-        return favRepository.findAll();
+    public List<FilmesFavoritos> listarFilmesFavoritos(Integer usuarioID) {
+       usuarioID = pegarIdUsuario();
+        return favRepository.findByUsuarioId(usuarioID);
     }
 
-    
+
     // Pegar um filme aleatório
     public FilmesFavoritos escolherAleatorio() {
-        var lista = listarFilmesFavoritos();
+        Integer usuarioID = pegarIdUsuario();
+        var lista = listarFilmesFavoritos(usuarioID);
         return lista.stream()
                 .skip(random.nextInt(lista.size()))
                 .findFirst()
                 .orElse(null);
     }
+
 
     // Deletar um filme da lista de favoritos
     public FilmesFavoritos deletarFilme(Integer id) {
@@ -175,6 +220,4 @@ public class FilmeService {
         }
         throw new ValidacaoError("Filme não encontrado");
     }
-
-
 }

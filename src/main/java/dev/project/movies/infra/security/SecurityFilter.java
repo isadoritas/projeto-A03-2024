@@ -27,7 +27,6 @@ public class SecurityFilter extends OncePerRequestFilter {
     // Filtro
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        System.out.println("chamando filtro");
         var tokenJWT = recuperarToken(request);  // pegar o token
 
         if (tokenJWT != null) {
@@ -35,7 +34,6 @@ public class SecurityFilter extends OncePerRequestFilter {
             var usuario = repository.findByEmail(subject);  // recuperar objeto usuario
             var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);  // setar usuario logado
-            System.out.println("logado");
         }
 
         filterChain.doFilter(request, response);  // Encaminhar para o proximo filtro
@@ -43,7 +41,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
 
     // Pegar o token
-    private String recuperarToken(HttpServletRequest request) {
+    public String recuperarToken(HttpServletRequest request) {
         var authorizationHeader = request.getHeader("Authorization");
 
         if (authorizationHeader != null) {

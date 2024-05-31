@@ -32,6 +32,11 @@ public class SecurityConfiguration  {
                         .authorizeHttpRequests(req -> {
                             req.requestMatchers("/usuarios").permitAll();
                             req.requestMatchers("/login").permitAll();
+                            req.requestMatchers("/filmes").permitAll();
+                            req.requestMatchers("/filmes/gen/{genero}").permitAll();
+                            req.requestMatchers("/filmes/ordem/alfabetica").permitAll();
+                            req.requestMatchers("/filmes/ordenar/avaliacao").permitAll();
+                            req.requestMatchers("/filmes/{titulo}").permitAll();
                             req.anyRequest().authenticated();
                         })
                         .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)  // chamar primeiro o nosso filtro
