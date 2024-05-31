@@ -1,7 +1,7 @@
 package dev.project.movies.servico;
 
 
-import dev.project.movies.exception.ValidacaoError;
+import dev.project.movies.infra.exception.ValidacaoError;
 import dev.project.movies.model.DadosLogin;
 import dev.project.movies.model.Usuario;
 import dev.project.movies.repository.UsuarioRepository;
@@ -41,19 +41,6 @@ public class UsuarioService {
         usuario.setSenha(encoder);
         Usuario novoUsuario = repositorio.save(usuario);
         return novoUsuario;
-    }
-
-
-    // VALIDAR SENHA
-    public boolean validarSenha(DadosLogin dados) {
-        var usuarioExiste = repositorio.findByEmail(dados.email());
-        if (usuarioExiste.isPresent()) {
-            var user = usuarioExiste.get();
-            String senha = user.getSenha();
-            Boolean valid = passwordEncoder.matches(dados.senha(), senha);
-            return valid;
-        }
-        throw new ValidacaoError("Usuário não cadastrado no banco");
     }
 
 

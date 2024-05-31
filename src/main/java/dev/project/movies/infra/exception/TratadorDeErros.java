@@ -1,4 +1,4 @@
-package dev.project.movies.exception;
+package dev.project.movies.infra.exception;
 
 
 import jakarta.persistence.EntityNotFoundException;

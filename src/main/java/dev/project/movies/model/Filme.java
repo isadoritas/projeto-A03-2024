@@ -17,15 +17,15 @@ public class Filme {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 
-    String titulo;
-    String classificacaoIndicativa;
+    private String titulo;
+    private String classificacaoIndicativa;
 
     @Column(unique = true)
-    String sinopse;
+    private String sinopse;
 
-    String dataDeLancamento;
-    Double avaliacao;
-    String poster;
+    private String dataDeLancamento;
+    private Double avaliacao;
+    private String poster;
 
     public Filme(String title, String adult, String overview, Double vote_average, String release_date, String backdrop_path) {
         this.titulo = title;

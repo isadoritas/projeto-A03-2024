@@ -2,7 +2,7 @@ package dev.project.movies.servico;
 
 import dev.project.movies.algoritmos.BubbleSort;
 import dev.project.movies.algoritmos.QuickSort;
-import dev.project.movies.exception.ValidacaoError;
+import dev.project.movies.infra.exception.ValidacaoError;
 import dev.project.movies.model.Filme;
 import dev.project.movies.model.FilmesFavoritos;
 import dev.project.movies.model.Results;
@@ -155,6 +155,7 @@ public class FilmeService {
         return favRepository.findAll();
     }
 
+    
     // Pegar um filme aleatório
     public FilmesFavoritos escolherAleatorio() {
         var lista = listarFilmesFavoritos();
