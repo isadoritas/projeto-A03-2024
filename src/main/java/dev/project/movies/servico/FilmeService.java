@@ -19,6 +19,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -123,36 +124,41 @@ public class FilmeService {
         var json = buscar.obterDados(endereco);
         var lista = comsumir.extrairDados(json, Results.class);
 
-
-        // TRANSFORMANDO A LISTA DE DADOS FILMES EM OBJETO FILME
-        List<Filme> listaFilmesPesquisados = lista.listaDadosFilmes().stream()
-                .map(d-> new Filme(d.titulo(), d.paraMaiores(), d.sinopse(),
-                        d.avaliacao(), d.dataDeLancamento(), d.poster()))
-                .collect(Collectors.toList());
-
-
-        // ALTERANDO ALGUNS ATRIBUTOS E SALVANDO NO BANCO
-        for (Filme f  : listaFilmesPesquisados) {
-            if (f.getClassificacaoIndicativa().equals("false")) {
-                f.setClassificacaoIndicativa("Livre");
-
-            } else  {
-                f.setClassificacaoIndicativa("+18");
-            }
-
-            if (f.getPoster() == null) {
-                f.setPoster(null);
-            } else {
-                f.setPoster("https://image.tmdb.org/t/p/w500/" + f.getPoster());
-            }
-
-            var filmeExiste = repositorio.findBySinopse(f.getSinopse());
-            if (filmeExiste.isEmpty()) {
-                repositorio.save(f);
-            }
-
+        if (lista.listaDadosFilmes().isEmpty()) {
+            throw new RuntimeException("Filme não encontrado");
         }
-        return listaFilmesPesquisados;
+        else {
+
+            // TRANSFORMANDO A LISTA DE DADOS FILMES EM OBJETO FILME
+            List<Filme> listaFilmesPesquisados = lista.listaDadosFilmes().stream()
+                    .map(d -> new Filme(d.titulo(), d.paraMaiores(), d.sinopse(),
+                            d.avaliacao(), d.dataDeLancamento(), d.poster()))
+                    .collect(Collectors.toList());
+
+
+            // ALTERANDO ALGUNS ATRIBUTOS E SALVANDO NO BANCO
+            for (Filme f : listaFilmesPesquisados) {
+                if (f.getClassificacaoIndicativa().equals("false")) {
+                    f.setClassificacaoIndicativa("Livre");
+
+                } else {
+                    f.setClassificacaoIndicativa("+18");
+                }
+
+                if (f.getPoster() == null) {
+                    f.setPoster(null);
+                } else {
+                    f.setPoster("https://image.tmdb.org/t/p/w500/" + f.getPoster());
+                }
+
+                var filmeExiste = repositorio.findBySinopse(f.getSinopse());
+                if (filmeExiste.isEmpty()) {
+                    repositorio.save(f);
+                }
+
+            }
+            return listaFilmesPesquisados;
+        }
     }
 
 
@@ -175,7 +181,9 @@ public class FilmeService {
     // Filmes salvos
     public List<Filme> listarFilmesBanco() {
         var lista = repositorio.findAll();
-        return lista;
+        var listaSortida = lista.stream().collect(Collectors.toList());
+        Collections.shuffle(listaSortida);
+        return listaSortida;
     }
 
 

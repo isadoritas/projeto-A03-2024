@@ -1,8 +1,6 @@
 package dev.project.movies.servico;
 
 
-import dev.project.movies.infra.exception.ValidacaoError;
-import dev.project.movies.model.DadosLogin;
 import dev.project.movies.model.Usuario;
 import dev.project.movies.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import java.util.List;
 
 @Service
 public class UsuarioService {
-
 
     @Autowired
     private UsuarioRepository repositorio;
@@ -37,10 +34,14 @@ public class UsuarioService {
 
     // CADASTRAR USUARIO
     public Usuario cadastrarUsuario(Usuario usuario) {
-        String encoder = passwordEncoder.encode(usuario.getSenha());
-        usuario.setSenha(encoder);
-        Usuario novoUsuario = repositorio.save(usuario);
-        return novoUsuario;
+        if (!repositorio.existsByEmail(usuario.getEmail())) {
+            String encoder = passwordEncoder.encode(usuario.getSenha());
+            usuario.setSenha(encoder);
+            Usuario novoUsuario = repositorio.save(usuario);
+            return novoUsuario;
+        } else {
+            throw new RuntimeException("email inserido já cadastrado");
+        }
     }
 
 
@@ -53,23 +54,4 @@ public class UsuarioService {
         }
         return false;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
