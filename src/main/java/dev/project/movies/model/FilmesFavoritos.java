@@ -30,6 +30,7 @@ public class FilmesFavoritos {
     String poster;
 
 
+    // CONSTRUTOR
     public FilmesFavoritos (Filme filme) {
         this.titulo = filme.getTitulo();
         this.classificacaoIndicativa = filme.getClassificacaoIndicativa();

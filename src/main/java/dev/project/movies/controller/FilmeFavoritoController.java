@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-@CrossOrigin("*")  // LIBERAR TODAS PORTAS
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/favoritos")
 public class FilmeFavoritoController {

@@ -45,7 +45,7 @@ public class UsuarioService {
     }
 
 
-    // DELETAR USUARIO DELETE
+    // DELETAR USUARIO
     public boolean excluirUsuario(Integer id) {
         var usuario = repositorio.findById(id);
         if (usuario.isPresent()) {

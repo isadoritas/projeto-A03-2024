@@ -8,6 +8,8 @@ import java.net.http.HttpResponse;
 
 public class ObterJson {
 
+
+    // CONSUMIR API E RETORNAR O JSON
     public String obterDados(String endereco) throws IOException, InterruptedException {
         try {
             HttpClient client = HttpClient.newHttpClient();

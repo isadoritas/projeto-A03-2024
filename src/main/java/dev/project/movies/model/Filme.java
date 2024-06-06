@@ -27,6 +27,7 @@ public class Filme {
     private Double avaliacao;
     private String poster;
 
+    // CONSTRUTOR
     public Filme(String title, String adult, String overview, Double vote_average, String release_date, String backdrop_path) {
         this.titulo = title;
         this.classificacaoIndicativa = adult;

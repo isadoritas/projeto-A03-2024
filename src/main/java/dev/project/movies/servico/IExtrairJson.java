@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.util.List;
 
+
 public interface IExtrairJson {
 
     <T> T extrairDados(String json, Class<T> classe) throws JsonProcessingException;

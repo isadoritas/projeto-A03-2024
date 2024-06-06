@@ -10,6 +10,7 @@ public class ExtrairJson implements IExtrairJson{
 
     private ObjectMapper mapper = new ObjectMapper();
 
+    // TRANSFORMAR O JSON EM UMA CLASSE
     @Override
     public <T> T extrairDados(String json, Class<T> classe) throws JsonProcessingException {
         try {
@@ -19,6 +20,7 @@ public class ExtrairJson implements IExtrairJson{
         }
     }
 
+    // TRANSFORMAR O JSON EM UMA LISTA DE OBJETOS
     @Override
     public <T> List<T> obterLista(String json, Class<T> classe) {
 

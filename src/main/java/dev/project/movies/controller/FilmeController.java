@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 
-@CrossOrigin("*")  // LIBERAR TODAS PORTAS
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/filmes")
 public class FilmeController {
@@ -43,13 +43,13 @@ public class FilmeController {
        return ResponseEntity.ok().body(service.ordenarTitulos());
     }
 
-    // AVALIACAO
+    // ORDENAR POR AVALIACAO
     @GetMapping("/ordenar/avaliacao")
     public ResponseEntity listarFilmesPelaAvaliacao() {
         return ResponseEntity.ok().body(service.ordenarAvaliacao());
     }
 
-    // PESQUISA
+    // PESQUISAR FILMES
     @GetMapping("/{titulo}")
     public ResponseEntity listarFilmesDaPesquisa(@PathVariable String titulo) throws IOException, InterruptedException {
        return ResponseEntity.ok().body(service.listarFilmesPesquisados(titulo));
