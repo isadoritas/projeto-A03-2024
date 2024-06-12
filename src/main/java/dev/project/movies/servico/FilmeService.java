@@ -107,7 +107,7 @@ public class FilmeService {
             }
 
             var filmeExiste = repositorio.findBySinopse(f.getSinopse());
-            if (filmeExiste.isEmpty()) {
+            if (filmeExiste.isEmpty() && f.getPoster() != null) {
                 repositorio.save(f);
             }
         }
@@ -152,7 +152,7 @@ public class FilmeService {
                 }
 
                 var filmeExiste = repositorio.findBySinopse(f.getSinopse());
-                if (filmeExiste.isEmpty()) {
+                if (filmeExiste.isEmpty() && f.getPoster() != null) {
                     repositorio.save(f);
                 }
 
