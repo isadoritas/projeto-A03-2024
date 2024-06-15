@@ -19,6 +19,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -111,7 +112,16 @@ public class FilmeService {
                 repositorio.save(f);
             }
         }
-        return listaFilmes;
+        List<Filme> listaInteira = repositorio.findAll();
+        List<Filme> listaDeRetorno = new ArrayList<>();
+        for (Filme f : listaInteira) {
+            for (Filme fv : listaFilmes) {
+                if(f.getPoster().equals(fv.getPoster())) {
+                    listaDeRetorno.add(f);
+                }
+            }
+        }
+        return listaDeRetorno;
     }
 
 
@@ -157,7 +167,16 @@ public class FilmeService {
                 }
 
             }
-            return listaFilmesPesquisados;
+            List<Filme> listaInteira = repositorio.findAll();
+            List<Filme> listaDeRetorno = new ArrayList<>();
+            for (Filme f : listaInteira) {
+                for (Filme fv : listaFilmesPesquisados) {
+                    if(f.getPoster().equals(fv.getPoster())) {
+                        listaDeRetorno.add(f);
+                    }
+                }
+            }
+            return listaDeRetorno;
         }
     }
 

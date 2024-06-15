@@ -31,6 +31,7 @@ public class SecurityConfiguration  {
                         .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                         .authorizeHttpRequests(req -> {
                             req.requestMatchers("/usuarios").permitAll();
+                            req.requestMatchers("/usuarios/{id}").permitAll();
                             req.requestMatchers("/login").permitAll();
                             req.requestMatchers("/filmes").permitAll();
                             req.requestMatchers("/filmes/gen/{genero}").permitAll();

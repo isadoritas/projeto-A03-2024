@@ -1,4 +1,7 @@
-<h1 style="text-align: center;">Next Movies <img src="images/logo_transparent.png" width="100" height="100" style="vertical-align: middle;"></h1>
+<h1 style="text-align: center;">
+  Next Movies 
+  <img src="images/logo_transparent.png" width="100" height="100" style="vertical-align: middle;">
+</h1>
 
 ![Tela De Login](images/tela_login.jpg)
 
@@ -73,7 +76,7 @@ Envie um Pull Request explicando suas alterações. <br><br>
 **Agradecemos sua contribuição!** 🎉
 
 
-## Nosso time
+## Nosso time 👩‍💻👨‍💻
 
 - **Isadora (Adora)**: Desenvolvimento FrontEnd 💻
 - **Henrique (Henriquix20)**: Desenvolvimento BackEnd e Banco de Dados 🛠️
