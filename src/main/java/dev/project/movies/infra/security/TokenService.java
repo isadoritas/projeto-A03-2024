@@ -21,13 +21,13 @@ public class TokenService {
     // Criar um token relacionado a um usuario
     public String gerarToken(Usuario usuario) {
         try {
-            var algoritmo = Algorithm.HMAC256(senha);                       // Senha para criar o token
-            return JWT.create()                                            // Criar token
-                    .withIssuer("Project_AO3-API-MOVIES")                 // Indentificar a aplicação
-                    .withSubject(usuario.getEmail())                     // Relacionar o token a um usuário
-                    .withExpiresAt(dataExpiracao())                     // Data de expiração do token
-                    .withClaim("Nome", usuario.getNome())        // Relacionar token ao nome do usuário
-                    .sign(algoritmo);                                 // fazer a assinatura
+            var algoritmo = Algorithm.HMAC256(senha);                      // Senha para criar o token
+            return JWT.create()                                           // Criar token
+                    .withIssuer("Project_AO3-API-MOVIES")                // Indentificar a aplicação
+                    .withSubject(usuario.getEmail())                    // Relacionar o token a um usuário
+                    .withExpiresAt(dataExpiracao())                    // Data de expiração do token
+                    .withClaim("Nome", usuario.getNome())       // Relacionar token ao nome do usuário
+                    .sign(algoritmo);                                // fazer a assinatura
         } catch (JWTCreationException exception){
             throw new RuntimeException("erro ao gerar token JWT ", exception);
         }

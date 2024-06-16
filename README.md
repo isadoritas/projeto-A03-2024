@@ -1,11 +1,9 @@
-<h1 style="text-align: center;">
-  Next Movies 
-  <img src="images/logo_transparent.png" width="100" height="100" style="vertical-align: middle;">
-</h1>
 
-![Tela De Login](images/tela_login.jpg)
+  <img src="images/logo_transparent.png" width="200" height="200" style="vertical-align: middle; display: block; margin-left: auto; margin-right: auto;">
 
-## Conceito
+## Next Movies
+
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
 
 **Next Movies é uma aplicação backend desenvolvida em Java com Spring Boot que consome 
 a API do TMDb (The Movie Database) para buscar informações sobre filmes. 
@@ -15,15 +13,17 @@ favoritem filmes, removam favoritos e selecionem um filme aleatório da lista de
 favoritos para assistir.** <br>
 <br>
 
-![Catálogo](images/catalogo.jpg)
+![Inicio](images/inicio.jpg)
 
 ## Funcionalidades 📝
 
 - **Busca de Filmes**: Utiliza a API do TMDb para pesquisar e exibir informações sobre filmes.
 - **Autenticação de Usuário**: Sistema de criação de conta e login com tokens JWT para autenticação.
+- **Criptografia de Senhas**: Senhas dos usuários são criptografadas antes de serem armazenadas no banco de dados.
 - **Gerenciamento de Favoritos**: Usuários podem favoritar e remover filmes da lista de favoritos.
 - **Seleção de Filme Aleatório**: Funcionalidade para selecionar um filme aleatório da lista de favoritos para assistir.
 - **Tratamento de Erros HTTP**: Tratamento adequado de erros HTTP com respostas informativas para o cliente.
+
 
 ## Tecnologias Utilizadas 🖥️
 [![Spring](https://img.shields.io/badge/Spring-6DB33F.svg?style=for-the-badge&logo=Spring&logoColor=white)](https://spring.io/)
@@ -32,12 +32,26 @@ favoritos para assistir.** <br>
 [![JSON Web Tokens](https://img.shields.io/badge/JSON%20Web%20Tokens-000000.svg?style=for-the-badge&logo=JSON-Web-Tokens&logoColor=white)](https://jwt.io/)
 [![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://openjdk.java.net/)
 
-
 - **Linguagem de Programação**: Java
 - **Framework**: Spring Boot
 - **Banco de Dados**: MySQL
 - **Autenticação**: JWT (JSON Web Tokens)
 - **API de Filmes**: TMDb (The Movie Database)
+
+
+
+### API Endpoints
+
+```bash
+- **GET /filmes - Retorna a lista completa dos filmes.
+- **GET /gen/{genero} - Retorna filmes filtrados pelo gênero.
+- **GET /ordem/alfabetica** - Retorna filmes em ordem alfabética.
+- **GET /ordenar/avaliacao** - Retorna filmes ordenados por avaliação.
+- **GET /{titulo} - Retorna filmes correspondentes ao título pesquisado.
+- **POST /login - Valida login e retorna o token de acesso.
+- **POST /usuarios - Cadastra um novo usuário.
+```
+
 
 ## Criação do Token JWT 🔑
 
@@ -78,10 +92,14 @@ Envie um Pull Request explicando suas alterações. <br><br>
 
 ## Nosso time 👩‍💻👨‍💻
 
-- **Isadora (Adora)**: Desenvolvimento FrontEnd 💻
-- **Henrique (Henriquix20)**: Desenvolvimento BackEnd e Banco de Dados 🛠️
-- **Gabriel (Gabs)**: Planejamento e Estruturação do Tema 📊
-- **Weslley (São Gonçalo)**: Ideias e Inovações 💡
+- **[Isadora](https://www.linkedin.com/in/isadoraadora/) (Adora)**: Desenvolvimento FrontEnd 💻 <br>
+    - Email: [isadoradorarodrigues@gmail.com](mailto:isadoradorarodrigues@gmail.com)
+- **[Henrique](http://www.linkedin.com/in/henrique-cezar) (Henriquix20)**: Desenvolvimento BackEnd e Banco de Dados 🛠️ <br>
+    - Email: [hcgv1@hotmail.com](mailto:hcgv1@hotmail.com) 
+- **[Gabriel](https://www.linkedin.com/in/gabs-silva/) (Gabs)**: Planejamento e Estruturação do Tema 📊 <br>
+    - Email: 
+- **[Weslley](https://www.linkedin.com/in/weslleyferreira404/) (São Gonçalo)**: Ideias e Inovações 💡 <br>
+    - Email: 
 
 ![Sobre nós](images/nosso_time.jpg)
 
