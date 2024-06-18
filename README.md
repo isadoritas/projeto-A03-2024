@@ -92,14 +92,14 @@ Envie um Pull Request explicando suas alterações. <br><br>
 
 ## Nosso time 👩‍💻👨‍💻
 
-- **[Isadora](https://www.linkedin.com/in/isadoraadora/) (Adora)**: Desenvolvimento FrontEnd 💻 <br>
+- **[Isadora](https://www.linkedin.com/in/isadoraadora/)**: Desenvolvimento FrontEnd 💻 <br>
     - Email: [isadoradorarodrigues@gmail.com](mailto:isadoradorarodrigues@gmail.com)
-- **[Henrique](http://www.linkedin.com/in/henrique-cezar) (Henriquix20)**: Desenvolvimento BackEnd e Banco de Dados 🛠️ <br>
+- **[Henrique](http://www.linkedin.com/in/henrique-cezar)**: Desenvolvimento BackEnd e Banco de Dados 🛠️ <br>
     - Email: [hcgv1@hotmail.com](mailto:hcgv1@hotmail.com) 
-- **[Gabriel](https://www.linkedin.com/in/gabs-silva/) (Gabs)**: Planejamento e Estruturação do Tema 📊 <br>
-    - Email: 
-- **[Weslley](https://www.linkedin.com/in/weslleyferreira404/) (São Gonçalo)**: Ideias e Inovações 💡 <br>
-    - Email: 
+- **[Gabriel](https://www.linkedin.com/in/gabriel-felipe-8b3543273/)**: Planejamento e Estruturação do Tema 📊 <br>
+    - Email: [gabrielfelipe0500@gmail.com](mailto:gabrielfelipe0500@gmail.com)
+- **Weslley**: Ideias e Inovações 💡 <br>
+    - Email: [weslleyferreiracruzeiro@gmail.com ](mailto:Weslleyferreiracruzeiro@gmail.com )
 
 ![Sobre nós](images/nosso_time.jpg)
 
