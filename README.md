@@ -92,7 +92,7 @@ Envie um Pull Request explicando suas alterações. <br><br>
 
 ## Nosso time 👩‍💻👨‍💻
 
-- **[Isadora](https://www.linkedin.com/in/isadoraadora/)**: Desenvolvimento FrontEnd 💻 <br>
+- **[Isadora](https://www.linkedin.com/in/isadora-rodrigues-904b36164/)**: Desenvolvimento FrontEnd 💻 <br>
     - Email: [isadoradorarodrigues@gmail.com](mailto:isadoradorarodrigues@gmail.com)
 - **[Henrique](http://www.linkedin.com/in/henrique-cezar)**: Desenvolvimento BackEnd e Banco de Dados 🛠️ <br>
     - Email: [hcgv1@hotmail.com](mailto:hcgv1@hotmail.com) 
